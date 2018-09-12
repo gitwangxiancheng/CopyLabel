@@ -9,6 +9,10 @@
 #import "CopyLabel.h"
 
 @implementation CopyLabel
+{
+    UIColor *oldColor;
+}
+
 
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -27,7 +31,7 @@
 
 // 使label能够成为响应事件
 - (BOOL)canBecomeFirstResponder {
-  
+    
     return YES;
 }
 
@@ -40,11 +44,31 @@
     return NO;
 }
 
+// 父类视图
+-(void)addSuperView{
+    // 原背景颜色
+    oldColor = self.backgroundColor;
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(removeCopyLabel)];
+    tap.numberOfTapsRequired = 1;
+    [self.superview addGestureRecognizer:tap];
+    self.alpha = 0.4;
+
+}
+
+-(void)removeCopyLabel{
+    self.backgroundColor = oldColor;
+    self.alpha = 1.0;
+}
+
 - (void)customCopy:(id)sender {
-    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-    pasteboard.string = self.text;
+     [self removeCopyLabel];
+     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+     pasteboard.string = self.text;
 }
 - (void)longPressAction:(UIGestureRecognizer *)recognizer {
+    // 父类视图
+    [self addSuperView];
     if (recognizer.state == UIGestureRecognizerStateBegan) {
         [self becomeFirstResponder];
         UIMenuItem *copyItem = [[UIMenuItem alloc] initWithTitle:@"拷贝" action:@selector(customCopy:)];
@@ -54,6 +78,12 @@
         [menuController setMenuVisible:YES animated:YES];
     }
 }
+
+
+
+
+
+
 
 
 

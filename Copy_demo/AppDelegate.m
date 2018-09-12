@@ -5,8 +5,8 @@
 //  Created by XianCheng Wang on 2018/8/21.
 //  Copyright © 2018年 XianCheng Wang. All rights reserved.
 //
-
 #import "AppDelegate.h"
+#import "ViewController.h"
 
 @interface AppDelegate ()
 
@@ -16,7 +16,9 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    self.window.backgroundColor = [UIColor whiteColor];
+    self.window.rootViewController = [[UINavigationController alloc]initWithRootViewController:[ViewController alloc]];
+    
     return YES;
 }
 

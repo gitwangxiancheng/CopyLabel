@@ -11,20 +11,23 @@
 
 @interface ViewController ()
 
+
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    CopyLabel *copy = [[CopyLabel alloc] initWithFrame:CGRectMake(0, 100, [UIScreen mainScreen].bounds.size.width,50)];
+    self.navigationItem.title = @"CopyLabel";
+    CopyLabel *copy = [[CopyLabel alloc] initWithFrame:CGRectMake(50,44, [UIScreen mainScreen].bounds.size.width - 100,35)];
     copy.text = @"清明时节雨纷纷，路上行人欲断魂。";
+    copy.textColor = [UIColor yellowColor];
+    copy.backgroundColor = [UIColor darkGrayColor];
     copy.textAlignment = NSTextAlignmentCenter;
-    copy.backgroundColor = [UIColor yellowColor];
-    copy.textColor = [UIColor redColor];
-    copy.font = [UIFont boldSystemFontOfSize:16];
+    copy.font = [UIFont boldSystemFontOfSize:14];
     [self.view addSubview:copy];
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
